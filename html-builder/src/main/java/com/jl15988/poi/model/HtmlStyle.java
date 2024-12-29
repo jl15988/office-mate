@@ -11,13 +11,13 @@ import java.util.Map;
  **/
 public class HtmlStyle {
 
-    private final Map<String, ICssStyle<?>> styleMap = new HashMap<String, ICssStyle<?>>();
+    private final Map<String, CssStyle> styleMap = new HashMap<String, CssStyle>();
 
-    public Map<String, ICssStyle<?>> getStyles() {
+    public Map<String, CssStyle> getStyles() {
         return styleMap;
     }
 
-    public void addStyle(final String name, final ICssStyle<?> style) {
+    public void addStyle(final String name, final CssStyle style) {
         styleMap.put(name, style);
     }
 

@@ -2,6 +2,7 @@ package com.jl15988.poi.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -63,5 +64,65 @@ public class CollUtil {
             }
         }
         return resultList;
+    }
+
+    /**
+     * 集合是否为空
+     *
+     * @param collection 集合
+     * @return 是否为空
+     */
+    public static boolean isEmpty(Collection<?> collection) {
+        return collection == null || collection.isEmpty();
+    }
+
+    /**
+     * 判断集合是否为空
+     *
+     * @param iterable 集合
+     * @return 是否为空
+     */
+    public static boolean isEmpty(Iterable<?> iterable) {
+        return null == iterable || isEmpty(iterable.iterator());
+    }
+
+    /**
+     * 判断集合是否为空
+     *
+     * @param iterator 集合
+     * @return 是否为空
+     */
+    public static boolean isEmpty(Iterator<?> iterator) {
+        return null == iterator || !iterator.hasNext();
+    }
+
+    /**
+     * 判断集合是否为非空
+     *
+     * @param collection 集合
+     * @return 是否为非空
+     */
+    public static boolean isNotEmpty(Collection<?> collection) {
+        return !isEmpty(collection);
+    }
+
+    /**
+     * 判断集合是否为非空
+     *
+     * @param iterable 集合
+     * @return 是否为非空
+     */
+    public static boolean isNotEmpty(Iterable<?> iterable) {
+        return !isEmpty(iterable);
+    }
+
+    /**
+     * 判断集合是否为非空
+     *
+     * @param iterator 集合
+     * @return 是否为非空
+     */
+    public static boolean isNotEmpty(Iterator<?> iterator) {
+        return !isEmpty(iterator);
     }
 }
