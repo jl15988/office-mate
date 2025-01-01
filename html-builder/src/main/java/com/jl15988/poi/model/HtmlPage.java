@@ -1,6 +1,7 @@
 package com.jl15988.poi.model;
 
 import com.jl15988.poi.utils.CssUtil;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
  * @author Jalon
  * @since 2024/12/1 12:10
  **/
+@Getter
 public class HtmlPage {
 
     private String lang;
@@ -23,23 +25,17 @@ public class HtmlPage {
 
     private final List<HtmlStyle> styleList = new ArrayList<>();
 
-    private List<String> styleContentList = new ArrayList<>();
+    private final List<String> styleContentList = new ArrayList<>();
 
+    // 是否有html容器
     private boolean isHasHtmlContainer = true;
 
+    // 是否有html样式
     private boolean isHasHtmlStyle = true;
-
-    public String getLang() {
-        return lang;
-    }
 
     public HtmlPage setLang(String lang) {
         this.lang = lang;
         return this;
-    }
-
-    public String getTitle() {
-        return title;
     }
 
     public HtmlPage setTitle(String title) {
@@ -47,26 +43,14 @@ public class HtmlPage {
         return this;
     }
 
-    public List<HtmlMeta> getMetaList() {
-        return metaList;
-    }
-
     public HtmlPage addMeta(HtmlMeta meta) {
         metaList.add(meta);
         return this;
     }
 
-    public List<HtmlLink> getLinkList() {
-        return linkList;
-    }
-
     public HtmlPage addLink(HtmlLink link) {
         linkList.add(link);
         return this;
-    }
-
-    public List<HtmlElement> getElementList() {
-        return elementList;
     }
 
     public HtmlPage addElement(HtmlElement element) {
@@ -87,10 +71,6 @@ public class HtmlPage {
     public HtmlPage clearElements() {
         elementList.clear();
         return this;
-    }
-
-    public List<HtmlStyle> getStyleList() {
-        return styleList;
     }
 
     public HtmlPage addStyle(HtmlStyle style) {
@@ -133,6 +113,11 @@ public class HtmlPage {
         return this;
     }
 
+    /**
+     * 获取样式html字符串
+     *
+     * @return 样式html字符串
+     */
     public String getStyleHtmlString() {
         StringBuilder stringBuilder = new StringBuilder();
         if (!styleContentList.isEmpty()) {
@@ -143,6 +128,11 @@ public class HtmlPage {
         return stringBuilder.toString();
     }
 
+    /**
+     * 转为html字符串
+     *
+     * @return html字符串
+     */
     public String toHtmlString() {
         StringBuilder stringBuilder = new StringBuilder();
         if (this.isHasHtmlContainer) {

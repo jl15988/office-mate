@@ -1,5 +1,6 @@
 package com.jl15988.poi.model;
 
+import com.jl15988.poi.enums.HtmlTagEnum;
 import com.jl15988.poi.utils.StrUtil;
 import lombok.Getter;
 
@@ -7,7 +8,7 @@ import java.util.UUID;
 import java.util.function.Consumer;
 
 /**
- * html元素
+ * html元素，默认元素为 div
  *
  * @author Jalon
  * @since 2024/11/30 19:51
@@ -17,20 +18,31 @@ public class HtmlElement {
 
     private final String uid;
 
+    // id
     private String id;
 
-    // 标签名称，为空时为纯文本
+    // 标签名称
     private final String tagName;
 
+    // 内容
     private String content;
 
+    // class
     private final HtmlClasses classes = new HtmlClasses();
 
+    // 样式
     private final CssStyle style = new CssStyle();
 
+    // 属性
     private final HtmlAttributes attributes = new HtmlAttributes();
 
+    // 子元素
     private final HtmlElements children = new HtmlElements();
+
+    public HtmlElement(HtmlTagEnum tagName) {
+        this.tagName = tagName.getName();
+        this.uid = UUID.randomUUID().toString();
+    }
 
     public HtmlElement(String tagName) {
         this.tagName = tagName;
@@ -38,9 +50,14 @@ public class HtmlElement {
     }
 
     public HtmlElement() {
-        this(null);
+        this(HtmlTagEnum.DIV);
     }
 
+    /**
+     * 设置id
+     *
+     * @param id id
+     */
     public HtmlElement setId(String id) {
         this.id = id;
         return this;
@@ -55,6 +72,11 @@ public class HtmlElement {
         return getTagName().equals(tagName);
     }
 
+    /**
+     * 设置内容
+     *
+     * @param content 内容
+     */
     public HtmlElement setContent(String content) {
         this.content = content;
         return this;
@@ -154,9 +176,14 @@ public class HtmlElement {
         return this;
     }
 
+    /**
+     * 转为html字符串
+     *
+     * @return html字符串
+     */
     public String toHtmlString() {
         StringBuilder stringBuilder = new StringBuilder();
-        boolean hasTag = StrUtil.isNotBlank(tagName);
+        boolean hasTag = StrUtil.isNotBlank(tagName) || HtmlTagEnum.STRING.equals(tagName);
 
         if (hasTag) {
             stringBuilder.append("<").append(tagName);
